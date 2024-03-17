@@ -3,6 +3,7 @@ import { useState } from "react";
 import ProjectSidebar from "./components/ProjectSidebar.jsx";
 import NewTask from "./components/NewTask.jsx";
 import NoTaskSelected from "./components/NoTaskSelected.jsx";
+import Login from "./components/Login.jsx";
 
 function App() {
   const [taskState, setTaskState] = useState({
@@ -10,13 +11,22 @@ function App() {
     Tasks: [],
   });
 
+  // Initialize isLoggedIn state here
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
   function handleStartAddTask() {
     setTaskState((prevState) => {
-      return {
-        ...prevState,
-        selectedTaskID: null,
-      };
+      return { ...prevState, selectedTaskID: null };
     });
+  }
+
+  function handleLoginSuccess() {
+    setIsLoggedIn(true);
+  }
+
+  // Ensure the Login component receives the onLoginSuccess prop correctly
+  if (!isLoggedIn) {
+    return <Login onLoginSuccess={handleLoginSuccess} />;
   }
 
   let content;
