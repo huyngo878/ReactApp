@@ -25,9 +25,9 @@ function App() {
   }
 
   // Ensure the Login component receives the onLoginSuccess prop correctly
-  if (!isLoggedIn) {
-    return <Login onLoginSuccess={handleLoginSuccess} />;
-  }
+  // if (!isLoggedIn) {
+  //   return <Login onLoginSuccess={handleLoginSuccess} />;
+  // }
 
   let content;
   if (taskState.selectedTaskID === null) {

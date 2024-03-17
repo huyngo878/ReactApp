@@ -9,7 +9,8 @@ export default function Login({ onLoginSuccess }) {
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log("Email: ", email, "Password: ", password);
-    onLoginSuccess(); // You need to define this in your parent component
+    // Pass the email to the onLoginSuccess function
+    onLoginSuccess(email);
   };
 
   return (
