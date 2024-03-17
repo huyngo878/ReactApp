@@ -32,48 +32,40 @@ export default function ProjectSidebar({ onStartAddTask }) {
     setShowLogin(false);
   };
 
-  // Fake login function to simulate a user logging in
   const handleLoginSuccess = (email) => {
     setIsLoggedIn(true);
     setUserEmail(email);
     setShowLogin(false);
   };
 
+  const handleLogout = () => {
+    setIsLoggedIn(false);
+    setUserEmail(""); // Clear the user email
+    // Here, you would also clear any other user-specific state or data
+  };
+
   return (
     <>
       <aside className="w-1/3 px-8 py-16 bg-stone-900 text-stone-50 md:w-72 rounded-r-xl">
-        <h2 className="mb-8 font-bold md:text-xl text-stone-200">
+        <h2 className="mb-8 font-bold uppercase md:text-xl text-stone-200">
           {isLoggedIn ? userEmail : "Task Reminder"}
         </h2>
         <div className="font-bold self-stretch text-center">
           {isLoggedIn ? (
-            <Button onClick={() => console.log("Go to Account Settings")}>
-              Account Settings
-            </Button>
+            <Button onClick={handleLogout}>Logout</Button>
           ) : (
             <Button onClick={handleLoginClick}>Login</Button>
           )}
         </div>
         <ul className="mt-12">
-          {/* Conditional rendering based on login status */}
           {isLoggedIn ? (
             <>
-              {/* Show menu items for logged in users */}
+              {/* Menu items to show when user is logged in */}
               <li className="mb-6">
-                <Button
-                  className="w-full font-bold"
-                  onClick={() => console.log("View Profile")}
-                >
-                  View Profile
-                </Button>
+                <Button className="w-full font-bold">View Profile</Button>
               </li>
               <li className="mb-6">
-                <Button
-                  className="w-full font-bold"
-                  onClick={() => console.log("Logout")}
-                >
-                  Logout
-                </Button>
+                <Button className="w-full font-bold">Account Settings</Button>
               </li>
               <li className="mb-6">
                 <Button className="w-full font-bold" onClick={onStartAddTask}>
@@ -88,7 +80,7 @@ export default function ProjectSidebar({ onStartAddTask }) {
             </>
           ) : (
             <>
-              {/* Show default menu items */}
+              {/* Default menu items */}
               <li className="mb-6">
                 <Button className="w-full font-bold" onClick={onStartAddTask}>
                   View Task
@@ -107,7 +99,6 @@ export default function ProjectSidebar({ onStartAddTask }) {
       {/* Modal for Login */}
       {showLogin && (
         <Modal onClose={handleCloseModal}>
-          {/* Pass handleLoginSuccess to the Login component */}
           <Login onLoginSuccess={handleLoginSuccess} />
         </Modal>
       )}
